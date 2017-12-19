@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Enregistrement</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <label>Nom</label><br/>
+            <h:inputText value="#{userBean.nom}">
+                <f:ajax event="keyup" execute="@this" render="prenom" />
+            </h:inputText>
+            <br/><br/>
+
+            <label>Prenom</label><br/>
+
+            <h:inputText value="#{userBean.prenom}" id="prenom">
+
+            </h:inputText>
+            <br/><br/>
+
+            <label>Sexe</label><br/>
+            <!--
+            <h:inputText value="#{userBean.sexe}">
+                <f:ajax event="keyup" execute="@this" render="age" />
+            </h:inputText>
+            -->
+            <h:selectOneRadio  value="#{userBean.sexe}">
+                <f:selectItems value="#{userBean.selectitem()}"/>
+                <f:ajax event="click" render="age" listener="#{userBean.listener}" />
+            </h:selectOneRadio>
+
+            <br/>
+
+            <label>Age</label><br/>
+
+            <h:inputText  value="#{userBean.age}" id="age">
+
+            </h:inputText>
+            <br/><br/>
+
+            <h:commandButton value="#{userBean.textSubmit}"  >
+                <f:ajax execute="@form" render="@all" listener="#{userBean.actionListener}" />
+                <f:ajax event="mouseover" render="@this" listener="#{userBean.listenerBlur}"/>
+            </h:commandButton>
+
+        </h:form>
+
+
+
+
+    </h:body>
+</html>
+
